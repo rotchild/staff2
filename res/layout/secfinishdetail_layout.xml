@@ -1,0 +1,522 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/secRl"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/titleDivHeight"
+    android:background="@color/morange"
+    android:id="@+id/tuidingtaskApply_RL"
+    >
+   <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="完成详情"
+        android:textColor="@color/white"
+        android:textSize="@dimen/titleFontSize"
+        android:layout_centerInParent="true"
+        />
+   
+   <ImageView
+       android:id="@+id/secfinishdetailback_iv"
+       android:layout_width="22dp"
+       android:layout_height="22dp"
+       android:src="@drawable/mback"
+       android:layout_centerVertical="true"
+       android:layout_marginLeft="10dp"
+       />
+   <!-- 
+      <TextView
+       android:id="@+id/finishdetailback_tv"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="返回"
+       android:textColor="@color/white"
+       android:textSize="@dimen/buttonFontSize"
+       android:layout_toRightOf="@id/finishdetailback_iv"
+       android:layout_centerVertical="true"
+       android:layout_marginLeft="5dp"
+       />
+    -->
+
+   <!-- 
+    <TextView
+      android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="菜单"
+        android:textSize="@dimen/titleFontSize"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        />  
+    -->
+    <!-- 
+         <ImageView
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:id="@+id/tuiding_menu"
+       android:src="@drawable/menu"
+       android:layout_alignParentRight="true"
+       android:layout_centerVertical="true"
+       android:layout_marginRight="5dp"
+       />
+     -->
+
+</RelativeLayout>    
+<ScrollView
+    android:id="@+id/secscroll_waixiuapplyDetail"
+    android:layout_width="match_parent"
+    android:layout_below="@id/tuidingtaskApply_RL"
+    android:layout_height="match_parent"
+    android:scrollbars="none"
+    >
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+       <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/detail_padding"
+        >
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="报案号："
+          android:textSize="@dimen/detail_font_size"
+          android:textColor="@color/detailFC"
+          android:layout_alignParentLeft="true"
+          />  
+       <TextView
+          android:id="@+id/secfinishdetail_reportNo_tv"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text=""
+          android:textSize="@dimen/detail_font_size"
+          android:textColor="@color/textgray"
+          android:layout_alignParentRight="true"
+          />  
+    </RelativeLayout>
+    
+     <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="1dp"
+         android:orientation="vertical"
+         android:background="@color/linegray"
+         >
+         
+         
+     </LinearLayout>  
+       
+        <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/detail_padding"
+        >
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="定损车牌号："
+          android:textSize="@dimen/detail_font_size"
+          android:textColor="@color/detailFC"
+          android:layout_alignParentLeft="true"
+          />  
+       <TextView
+          android:id="@+id/secfinishdetail_carNo_tv"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text=""
+          android:textSize="@dimen/detail_font_size"
+          android:textColor="@color/textgray"
+          android:layout_alignParentRight="true"
+          />  
+    </RelativeLayout>
+    
+         <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="1dp"
+         android:orientation="vertical"
+         android:background="@color/linegray"
+         >
+         
+         
+     </LinearLayout> 
+        
+      <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/detail_padding"
+        >
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="定损车牌型号："
+          android:textSize="@dimen/detail_font_size"
+          android:textColor="@color/detailFC"
+          android:layout_alignParentLeft="true"
+          />  
+       <TextView
+          android:id="@+id/secfinishdetail_carType_tv"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text=""
+          android:textSize="@dimen/detail_font_size"
+          android:textColor="@color/textgray"
+          android:layout_alignParentRight="true"
+          />  
+    </RelativeLayout>
+    
+        <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="1dp"
+         android:orientation="vertical"
+         android:background="@color/linegray"
+         >
+         
+     </LinearLayout> 
+      
+      
+        <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/detail_padding"
+        >
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="是否为标的车："
+          android:textSize="@dimen/detail_font_size"
+          android:textColor="@color/detailFC"
+          android:layout_alignParentLeft="true"
+          />  
+       <TextView
+          android:id="@+id/secfinishdetail_isTheCar_tv"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text=""
+          android:textSize="@dimen/detail_font_size"
+          android:textColor="@color/textgray"
+          android:layout_alignParentRight="true"
+          />  
+    </RelativeLayout>
+    
+             <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="1dp"
+         android:orientation="vertical"
+         android:background="@color/linegray"
+         >
+         
+         
+     </LinearLayout> 
+        
+       <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/detail_padding"
+        >
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="标的车牌号："
+          android:textSize="@dimen/detail_font_size"
+          android:textColor="@color/detailFC"
+          android:layout_alignParentLeft="true"
+          />  
+       <TextView
+          android:id="@+id/secfinishdetail_theCarNo_tv"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text=""
+          android:textSize="@dimen/detail_font_size"
+          android:textColor="@color/textgray"
+          android:layout_alignParentRight="true"
+          />  
+    </RelativeLayout>
+    
+       <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="1dp"
+         android:orientation="vertical"
+         android:background="@color/linegray"
+         >
+         
+         
+     </LinearLayout> 
+       
+         <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/detail_padding"
+        >
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="拆检点："
+          android:textSize="@dimen/detail_font_size"
+          android:textColor="@color/detailFC"
+          android:layout_alignParentLeft="true"
+          />  
+       <TextView
+          android:id="@+id/secfinishdetail_reportDeport_tv"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text=""
+          android:textSize="@dimen/detail_font_size"
+          android:textColor="@color/textgray"
+          android:layout_alignParentRight="true"
+          />  
+    </RelativeLayout>
+    
+        <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="1dp"
+         android:orientation="vertical"
+         android:background="@color/linegray"
+         >
+         
+         
+     </LinearLayout> 
+         
+      <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/detail_padding"
+        >
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="拆检点联系人："
+          android:textSize="@dimen/detail_font_size"
+          android:textColor="@color/detailFC"
+          android:layout_alignParentLeft="true"
+          />  
+       <TextView
+          android:id="@+id/secfinishdetail_deportConnector_tv"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text=""
+          android:textSize="@dimen/detail_font_size"
+          android:textColor="@color/textgray"
+          android:layout_alignParentRight="true"
+          />  
+    </RelativeLayout> 
+    
+      <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="1dp"
+         android:orientation="vertical"
+         android:background="@color/linegray"
+         >
+         
+         
+     </LinearLayout> 
+      
+      <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/detail_padding"
+        >
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="拆检点联系电话："
+          android:textSize="@dimen/detail_font_size"
+          android:textColor="@color/detailFC"
+          android:layout_alignParentLeft="true"
+          />  
+       <TextView
+          android:id="@+id/secfinishdetail_deportConnectorphone_tv"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text=""
+          android:textSize="@dimen/detail_font_size"
+          android:textColor="@color/textgray"
+          android:layout_alignParentRight="true"
+          />  
+    </RelativeLayout>
+    
+     <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="1dp"
+         android:orientation="vertical"
+         android:background="@color/linegray"
+         >
+         
+         
+     </LinearLayout> 
+      
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/detail_padding"
+        >
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="送修人："
+          android:textSize="@dimen/detail_font_size"
+          android:textColor="@color/detailFC"
+          android:layout_alignParentLeft="true"
+          />  
+       <TextView
+          android:id="@+id/secfinishdetail_reporterName_tv"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text=""
+          android:textSize="@dimen/detail_font_size"
+          android:textColor="@color/textgray"
+          android:layout_alignParentRight="true"
+          />  
+    </RelativeLayout>
+    
+         <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="1dp"
+         android:orientation="vertical"
+         android:background="@color/linegray"
+         >
+         
+         
+     </LinearLayout> 
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/detail_padding"
+        >
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="送修人联系电话："
+          android:textSize="@dimen/detail_font_size"
+          android:textColor="@color/detailFC"
+          android:layout_alignParentLeft="true"
+          />  
+       <TextView
+          android:id="@+id/secfinishdetail_theReporterPhone_tv"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text=""
+          android:textSize="@dimen/detail_font_size"
+          android:textColor="@color/textgray"
+          android:layout_alignParentRight="true"
+          />  
+    </RelativeLayout>
+    
+     <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="1dp"
+         android:orientation="vertical"
+         android:background="@color/linegray"
+         >
+         
+         
+     </LinearLayout> 
+    
+    
+        <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/detail_padding"
+        >
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="任务分配时间："
+          android:textSize="@dimen/detail_font_size"
+          android:textColor="@color/detailFC"
+          android:layout_alignParentLeft="true"
+          />  
+       <TextView
+          android:id="@+id/secfinishdetail_thefenpeitime_tv"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text=""
+          android:textSize="@dimen/detail_font_size"
+          android:textColor="@color/textgray"
+          android:layout_alignParentRight="true"
+          />  
+    </RelativeLayout>
+    
+      <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="1dp"
+         android:orientation="vertical"
+         android:background="@color/linegray"
+         >
+         
+         
+     </LinearLayout> 
+        
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/detail_padding"
+        >
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="估损金额："
+          android:textSize="@dimen/detail_font_size"
+          android:textColor="@color/detailFC"
+          android:layout_alignParentLeft="true"
+          />  
+       <TextView
+          android:id="@+id/secfinishdetail_theAboutMoney_tv"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text=""
+          android:textSize="@dimen/detail_font_size"
+          android:textColor="@color/textgray"
+          android:layout_alignParentRight="true"
+          />  
+    </RelativeLayout>
+    
+      <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="1dp"
+         android:orientation="vertical"
+         android:background="@color/linegray"
+         >
+         
+         
+     </LinearLayout> 
+    
+        <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/detail_padding"
+        >
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="定损金额："
+          android:textSize="@dimen/detail_font_size"
+          android:textColor="@color/detailFC"
+          android:layout_alignParentLeft="true"
+          />  
+       <TextView
+          android:id="@+id/secfinishdetail_dingsun_money_tv"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text=""
+          android:textSize="@dimen/detail_font_size"
+          android:textColor="@color/textgray"
+          android:layout_alignParentRight="true"
+          />  
+    </RelativeLayout>
+<LinearLayout
+    android:id="@+id/zhixian_ll"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+    
+</LinearLayout>
+        </LinearLayout>    
+
+</ScrollView>
+
+</RelativeLayout>
