@@ -52,6 +52,8 @@ public class SecFinishDetailActivity extends Activity {
 	//TextView lossRemark_tv;
 	TextView auditStartTime_tv;
 	//TextView auditRemark_tv;
+	
+	TextView isYidiCar_tv;
 	ImageView finishDetailBack_iv;
 	
 	Button waixiuLookBtn,tuidingLookBtn,jiheLookBtn;//查看备注
@@ -208,7 +210,7 @@ zhixian=(LinearLayout)findViewById(R.id.zhixian_ll);
 	theAboutMoney_tv=(TextView)findViewById(R.id.secfinishdetail_theAboutMoney_tv);
 	dingsun_money=(TextView)findViewById(R.id.secfinishdetail_dingsun_money_tv);
 	
-	
+	isYidiCar_tv=(TextView)findViewById(R.id.secfinishdetail_isYidiCar_tv);
 	
 	case_id=selectTaskObject.getCase_id();//get case_id
 	String reportStr=selectTaskObject.getCase_No();
@@ -224,6 +226,8 @@ zhixian=(LinearLayout)findViewById(R.id.zhixian_ll);
 	String theFenpeiStr=selectTaskObject.getYard_time();
 	String theAboutMoneyStr=selectTaskObject.getLoss_price();
 	String dingsunMoneyStr=selectTaskObject.getDingsun_price();
+	String isYidiCar=selectTaskObject.getIsYidiCar();
+	String isYidiCarStr=isYidiCar.equals("1")?"是":"否";
 	
 	reportNo_tv.setText(reportStr);
 	carNo_tv.setText(carNoStr);
@@ -239,6 +243,7 @@ zhixian=(LinearLayout)findViewById(R.id.zhixian_ll);
 	thefenpeiTime_tv.setText(theFenpeiSDFStr);
 	theAboutMoney_tv.setText(theAboutMoneyStr);
 	dingsun_money.setText(dingsunMoneyStr);
+	isYidiCar_tv.setText(isYidiCarStr);
 	
 	getAllZhiXian(case_id);//获取支线信息
 	

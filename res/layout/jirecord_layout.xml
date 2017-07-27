@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/titleDivHeight"
+    android:background="@color/morange"
+    android:id="@+id/tuidingtaskApply_RL"
+    >
+   <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="稽核记录"
+        android:textColor="@color/white"
+        android:textSize="@dimen/titleFontSize"
+        android:layout_centerInParent="true"
+        />
+   
+   <ImageView
+       android:id="@+id/jifinishdetailback_iv"
+       android:layout_width="22dp"
+       android:layout_height="22dp"
+       android:src="@drawable/mback"
+       android:layout_centerVertical="true"
+       android:layout_marginLeft="10dp"
+       />
+</RelativeLayout>    
+<ScrollView
+    android:id="@+id/scroll_waixiuapplyDetail"
+    android:layout_width="match_parent"
+    android:layout_below="@id/tuidingtaskApply_RL"
+    android:layout_height="match_parent"
+    android:scrollbars="none"
+    >
+  <LinearLayout
+    android:id="@+id/jirecord_ll"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+
+            
+     </LinearLayout>  
+            
+</ScrollView>
+
+</RelativeLayout>

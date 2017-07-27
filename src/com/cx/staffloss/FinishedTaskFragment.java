@@ -196,6 +196,8 @@ public class FinishedTaskFragment extends Fragment {
 								String loss_price=String.valueOf(loss_priceD);
 								loss_price=mdata.getString("loss_price");//testok
 								String yard_time=mdata.getString("yard_time");
+								String isYidiCar=mdata.getString("isYidiCar");//是否为异地车
+								
 								//String yard_time=MUtil.getDetailTime(yard_timeStamp);
 								int case_stateInt=mdata.getInt("case_state");
 								String dingsun_price="";
@@ -270,7 +272,7 @@ public class FinishedTaskFragment extends Fragment {
 										isVip,parterid,parters_name,parter_manager,parter_mobile,delivery_name,delivery_mobile,
 										loss_price,yard_time,dingsun_price,repair_state,audit_state,loss_state,repairTimeStamp,repair_factory,
 										repair_parts,parts_price,repair_price,repair_remark,loss_add_timeStamp,loss_remark,
-										audit_starttimeStamp,audit_remark);//yard_time 为timestamp
+										audit_starttimeStamp,audit_remark,isYidiCar);//yard_time 为timestamp
 								finishtaskRecorderList.add(mFinishObject);
 							}
 							finishtaskRecordAdapter.notifyDataSetChanged();

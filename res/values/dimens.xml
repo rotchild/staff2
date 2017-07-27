@@ -17,7 +17,8 @@
     <dimen name="iconw">30dp</dimen>
     <dimen name="itemContentFontSize">14dp</dimen>
     <dimen name="itemTitleFontSize">18dp</dimen>
-    <dimen name="buttonFontSize">18dp</dimen>
+    <dimen name="buttonFontSize">14dp</dimen>
+    <dimen name="buttonFontSize3">18dp</dimen>
     <dimen name="btn2FontSize">16dp</dimen>
     <dimen name="tagtextFS">15dp</dimen>
 

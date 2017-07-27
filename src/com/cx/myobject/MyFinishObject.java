@@ -6,7 +6,9 @@ public class MyFinishObject implements Serializable{
 private String case_id,case_No,car_No,brand_name,is_target,target_No,isvip,parter_id,parters_name,
 parter_manager,parter_mobile,delivery_name,delivery_mobile,loss_price,yard_time,dingsun_price,
 waixiu_state,audit_state,loss_state,repair_time,repair_factory,repair_parts,parts_price,repair_price,
-repair_remark,lossStartTimeStamp,lossRemark,auditStartTimeStamp,auditRemark;
+repair_remark,lossStartTimeStamp,lossRemark,auditStartTimeStamp,auditRemark,isYidiCar;
+
+
 
 
 
@@ -28,7 +30,7 @@ public MyFinishObject(String case_id, String case_No, String car_No,
 		String repair_time, String repair_factory, String repair_parts,
 		String parts_price, String repair_price, String repair_remark,
 		String lossStartTimeStamp, String lossRemark,
-		String auditStartTimeStamp, String auditRemark) {
+		String auditStartTimeStamp, String auditRemark, String isYidiCar) {
 	super();
 	this.case_id = case_id;
 	this.case_No = case_No;
@@ -59,6 +61,7 @@ public MyFinishObject(String case_id, String case_No, String car_No,
 	this.lossRemark = lossRemark;
 	this.auditStartTimeStamp = auditStartTimeStamp;
 	this.auditRemark = auditRemark;
+	this.isYidiCar = isYidiCar;
 }
 
 public String getCase_No() {
@@ -291,6 +294,14 @@ public String getCase_id() {
 
 public void setCase_id(String case_id) {
 	this.case_id = case_id;
+}
+
+public String getIsYidiCar() {
+	return isYidiCar;
+}
+
+public void setIsYidiCar(String isYidiCar) {
+	this.isYidiCar = isYidiCar;
 }
 
 

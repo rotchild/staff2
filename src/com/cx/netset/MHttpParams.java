@@ -18,6 +18,9 @@ public class MHttpParams {
 	public static String IP="27.17.25.158";
 	public static String CanfinishUrl="api/Public/ENDDEFLOSSFLAG";
 	public static String queryUrl="api/Public/getCaseById";
+	public static String queryWaiRecordUrl="api/Public/queryCXRepairTaskbyCaseId";//查询外修记录
+	public static String queryTuiRecordUrl="api/Public/queryCXLossTaskbyCaseId";//查询推定记录
+	public static String queryJiRecordUrl="api/Public/queryCXAuditTaskbyCaseId";//查询稽核记录
 	public static String FinishTaskUrl="api/Public/getHisTaskRec";
 	public static String FinishCXTaskUrl="api/Public/getCxHisTaskRec";//查询v_cxcase
 	public static String ZhiXianQueryTaskUrl="api/Public/GetAllByCaseId";//查询支线任务

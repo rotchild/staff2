@@ -1,5 +1,8 @@
 package com.cx.staffloss;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.json.JSONArray;
@@ -39,17 +42,20 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioGroup;
+import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class DealingTaskDetail extends  Activity {
 Button getPhotoBtn,waixiuBtn,tuidingBtn,jiHeBtn;
-
+Button waiRecordBtn,tuiRecordBtn,jiRecordBtn;
 Button finishButton;
 
 TextView reportNo_tv,carNo_tv,carType_tv,isTheCar_tv,theCarNo_tv,reportDeport_tv,
 reporterName_tv,theAboutMoney_tv,deportConnector_tv,theYardTime_tv;
-
+RadioGroup isYidiCarRG;
+int isYidiCar=0;//0非异地
 //TextView dealingTaskBackTv;
 
 MyTaskObject selectTaskObject;
@@ -107,6 +113,27 @@ ProgressDialog queryPd;
 			}
 			
 		});*/
+		
+		isYidiCarRG=(RadioGroup)findViewById(R.id.isyidiCarRG);
+		isYidiCarRG.setOnCheckedChangeListener(new OnCheckedChangeListener(){
+
+			@Override
+			public void onCheckedChanged(RadioGroup group, int checkedId) {
+				// TODO 自动生成的方法存根
+				switch(checkedId){
+				case R.id.isyidiCar:
+					isYidiCar=1;
+					break;
+				case R.id.notyidiCar:
+					isYidiCar=0;
+					break;
+				default:
+					break;
+				}
+			}
+			
+		});
+		
 		
 		finishButton=(Button)findViewById(R.id.casefinish_btn);
 		finishButton.setOnClickListener(new OnClickListener(){
@@ -220,7 +247,44 @@ ProgressDialog queryPd;
 		//theReporterPhone_tv.setText(theReporterPhonestr);
 		theAboutMoney_tv.setText(theAboutMoneystr);
 		theYardTime_tv.setText(yardTimeStr);
-		
+		{
+			waiRecordBtn=(Button)findViewById(R.id.waixiurecord_btn);
+			tuiRecordBtn=(Button)findViewById(R.id.tuidingrecord_btn);
+			jiRecordBtn=(Button)findViewById(R.id.jiherecord_btn);
+			
+			waiRecordBtn.setOnClickListener(new OnClickListener(){
+
+				@Override
+				public void onClick(View v) {
+					// TODO 自动生成的方法存根
+					queryWaiRecordByHttp(caseidStr);
+//					Intent toWaiRecord=new Intent(DealingTaskDetail.this,WaiRecordAct.class);
+//					startActivity(toWaiRecord);
+				}
+				
+			});
+			tuiRecordBtn.setOnClickListener(new OnClickListener(){
+
+				@Override
+				public void onClick(View v) {
+					// TODO 自动生成的方法存根
+					queryTuiRecordByHttp(caseidStr);
+				}
+				
+			});
+			jiRecordBtn.setOnClickListener(new OnClickListener(){
+
+				@Override
+				public void onClick(View v) {
+					// TODO 自动生成的方法存根
+					queryJiRecordByHttp(caseidStr);
+				}
+				
+			});
+			
+			
+			
+		}
 		getPhotoBtn=(Button)findViewById(R.id.getPhoto_btn);
 		waixiuBtn=(Button)findViewById(R.id.waixiu_btn);
 		tuidingBtn=(Button)findViewById(R.id.tuiding_btn);
@@ -553,6 +617,453 @@ ProgressDialog queryPd;
 
 	}*/
 	
+	public void queryWaiRecordByHttp(final String case_id){//查询外修记录
+		queryPd=ProgressDialog.show(DealingTaskDetail.this, "查询中", "请稍后");
+		AsyncHttpClient queryClient=new AsyncHttpClient();
+		queryClient.addHeader("Charset", MHttpParams.DEFAULT_CHARSET);
+		queryClient.setTimeout(MHttpParams.DEFAULT_TIME_OUT);
+		String dUrl=MHttpParams.IP;
+		String mUrl=dealingTaskSP.getString("IP", dUrl);
+		String dPort=MHttpParams.DEFAULT_PORT;
+		String mPort=dealingTaskSP.getString("Port", dPort);
+		String queryUrl="http://"+mUrl+":"+mPort+"/"+MHttpParams.queryWaiRecordUrl;
+		RequestParams params=new RequestParams();
+		//int case_id=caseidStr;
+		params.put("case_id", case_id);
+		queryClient.put(queryUrl, params,  new JsonHttpResponseHandler(){
+
+			@Override
+			public void onSuccess(int statusCode, JSONObject response) {
+				// TODO 自动生成的方法存根
+				super.onSuccess(statusCode, response);
+				if(queryPd!=null&&queryPd.isShowing()){
+					queryPd.dismiss();
+				}
+				boolean success=false;
+				try{
+					success=response.getBoolean("success");
+					if(success){
+						ArrayList<HashMap> mapList=new ArrayList<HashMap>();
+						
+						
+						JSONArray data=response.getJSONArray("data");
+						for(int i=0;i<data.length();i++){
+							HashMap recordStore=new HashMap();
+							JSONObject mdata=(JSONObject) data.get(i);
+							String repair_finishstate=mdata.getString("repair_finishstate");
+							if(repair_finishstate.equals("1")){
+								String repair_finishState="已完成";
+								String addTimeStamp=mdata.getString("add_time");//时间戳
+								String addTime=MUtil.getDetailTime(addTimeStamp);
+								String repairTimeStamp=mdata.getString("repair_time");//时间戳
+								String repairTime=MUtil.getStrTime(repairTimeStamp);
+								String repair_endtimeStamp=mdata.getString("repair_endtime");//时间戳
+								
+								String repair_endtime="";
+								if(repair_endtimeStamp.equals("null")){
+									
+								}else{
+									repair_endtime=MUtil.getDetailTime(repair_endtimeStamp);
+								}
+								String repair_id=mdata.getString("id");//repair_taskid
+								String repair_parts=mdata.getString("repair_parts");
+								String repair_price=mdata.getString("repair_price");
+								String parts_price=mdata.getString("parts_price");
+								 
+								String repair_remark=mdata.getString("repair_remark");
+								if(repair_remark.equals("null")){
+									repair_remark="";	
+								}
+								String outrepair_remark=mdata.getString("outrepair_remark");
+								if(outrepair_remark.equals("null")){
+									outrepair_remark="";
+								}
+								String factoryname=mdata.getString("factoryname");
+								
+								recordStore.put("repair_finishState", repair_finishState);
+								recordStore.put("repairid", repair_id);
+								recordStore.put("add_time", addTime);
+								recordStore.put("repairTime", repairTime);
+								recordStore.put("repair_endtime", repair_endtime);
+								recordStore.put("repair_parts", repair_parts);
+								recordStore.put("repair_price", repair_price);
+								recordStore.put("parts_price", parts_price);
+								recordStore.put("repair_remark", repair_remark);
+								recordStore.put("outrepair_remark", outrepair_remark);
+								recordStore.put("factoryname", factoryname);
+								
+								mapList.add(recordStore);
+							}else{
+								String repair_finishState="外修中";
+								String addTimeStamp=mdata.getString("add_time");//时间戳
+								String addTime=MUtil.getDetailTime(addTimeStamp);
+								String repairTimeStamp=mdata.getString("repair_time");//时间戳
+								String repairTime=MUtil.getStrTime(repairTimeStamp);
+								String repair_endtimeStamp=mdata.getString("repair_endtime");//时间戳
+								
+								String repair_endtime="";
+								if(repair_endtimeStamp.equals("null")){
+									
+								}else{
+									repair_endtime=MUtil.getDetailTime(repair_endtimeStamp);
+								}
+								String repair_id=mdata.getString("id");//repair_taskid
+								String repair_parts=mdata.getString("repair_parts");
+								String repair_price=mdata.getString("repair_price");
+								String parts_price=mdata.getString("parts_price");
+								String repair_remark=mdata.getString("repair_remark");
+								if(repair_remark.equals("null")){
+									repair_remark="";	
+								}
+								String outrepair_remark=mdata.getString("outrepair_remark");
+								if(outrepair_remark.equals("null")){
+									outrepair_remark="";
+								}
+								String factoryname=mdata.getString("factoryname");
+								
+								recordStore.put("repair_finishState", repair_finishState);
+								recordStore.put("repairid", repair_id);
+								recordStore.put("add_time", addTime);
+								recordStore.put("repairTime", repairTime);
+								recordStore.put("repair_endtime", repair_endtime);
+								recordStore.put("repair_parts", repair_parts);
+								recordStore.put("repair_price", repair_price);
+								recordStore.put("parts_price", parts_price);
+								recordStore.put("repair_remark", repair_remark);
+								recordStore.put("outrepair_remark", outrepair_remark);
+								recordStore.put("factoryname", factoryname);
+								
+								mapList.add(recordStore);
+							}
+						}
+						Intent toWaiRecord=new Intent(DealingTaskDetail.this,WaiRecordAct.class);
+						toWaiRecord.putExtra("maplist",(Serializable) mapList);
+						startActivity(toWaiRecord);
+
+					}else{
+						
+					}
+				}catch(JSONException e){
+					e.printStackTrace();
+				}
+			}
+
+			@Override
+			public void onFailure(Throwable e, JSONArray errorResponse) {
+				// TODO 自动生成的方法存根
+				super.onFailure(e, errorResponse);
+				if(queryPd!=null&&queryPd.isShowing()){
+					queryPd.dismiss();
+				}
+
+			}
+			
+			@Override
+			public void onFailure(Throwable e, String errorResponse) {
+				// TODO 自动生成的方法存根
+				super.onFailure(e, errorResponse);
+				Log.d("dealingTask", "query on Failure");
+				if(queryPd!=null&&queryPd.isShowing()){
+					queryPd.dismiss();
+				}
+
+			}
+			
+		});
+	}
+	
+	
+	public void queryTuiRecordByHttp(final String case_id){//查询推定记录
+		queryPd=ProgressDialog.show(DealingTaskDetail.this, "查询中", "请稍后");
+		AsyncHttpClient queryClient=new AsyncHttpClient();
+		queryClient.addHeader("Charset", MHttpParams.DEFAULT_CHARSET);
+		queryClient.setTimeout(MHttpParams.DEFAULT_TIME_OUT);
+		String dUrl=MHttpParams.IP;
+		String mUrl=dealingTaskSP.getString("IP", dUrl);
+		String dPort=MHttpParams.DEFAULT_PORT;
+		String mPort=dealingTaskSP.getString("Port", dPort);
+		String queryUrl="http://"+mUrl+":"+mPort+"/"+MHttpParams.queryTuiRecordUrl;
+		RequestParams params=new RequestParams();
+		//int case_id=caseidStr;
+		params.put("case_id", case_id);
+		queryClient.put(queryUrl, params,  new JsonHttpResponseHandler(){
+
+			@Override
+			public void onSuccess(int statusCode, JSONObject response) {
+				// TODO 自动生成的方法存根
+				super.onSuccess(statusCode, response);
+				if(queryPd!=null&&queryPd.isShowing()){
+					queryPd.dismiss();
+				}
+				boolean success=false;
+				try{
+					success=response.getBoolean("success");
+					if(success){
+						ArrayList<HashMap> mapList=new ArrayList<HashMap>();
+						
+						
+						JSONArray data=response.getJSONArray("data");
+						for(int i=0;i<data.length();i++){
+							HashMap recordStore=new HashMap();
+							JSONObject mdata=(JSONObject) data.get(i);
+							String loss_state=mdata.getString("loss_state");
+							if(loss_state.equals("1")){
+								String loss_finishstate="已完成";
+								String addTimeStamp=mdata.getString("add_time");//时间戳
+								String addTime=MUtil.getDetailTime(addTimeStamp);
+								String loss_starttimeStamp=mdata.getString("loss_starttime");//时间戳
+								String loss_starttime="";
+								if(loss_starttimeStamp.equals("null")){
+									
+								}else{
+									loss_starttime=MUtil.getStrTime(loss_starttimeStamp);
+								}
+								 
+								String loss_endtimeStamp=mdata.getString("loss_endtime");//时间戳
+								
+								String loss_endtime="";
+								if(loss_endtimeStamp.equals("null")){
+									
+								}else{
+									loss_endtime=MUtil.getDetailTime(loss_endtimeStamp);
+								}
+								String loss_id=mdata.getString("id");//repair_taskid
+								String loss_price=mdata.getString("loss_price");
+								if(loss_price.equals("null")){
+									loss_price="";
+								}
+
+								String factory_name=mdata.getString("factory_name");
+								if(factory_name.equals("null")){
+									factory_name="";
+								}
+								String loss_remark=mdata.getString("loss_remark");
+								if(loss_remark.equals("null")){
+									loss_remark="";
+								}
+								recordStore.put("loss_finishstate", loss_finishstate);
+								recordStore.put("loss_id", loss_id);
+								recordStore.put("add_time", addTime);
+								recordStore.put("loss_starttime", loss_starttime);
+								recordStore.put("loss_endtime", loss_endtime);
+								recordStore.put("loss_price", loss_price);
+								recordStore.put("factory_name", factory_name);
+								recordStore.put("loss_remark", loss_remark);
+
+								
+								mapList.add(recordStore);
+							}else{
+								String loss_finishstate="推定中";
+								String addTimeStamp=mdata.getString("add_time");//时间戳
+								String addTime=MUtil.getDetailTime(addTimeStamp);
+								String loss_starttimeStamp=mdata.getString("loss_starttime");//时间戳
+								String loss_starttime="";
+								if(loss_starttimeStamp.equals("null")){
+									
+								}else{
+									loss_starttime=MUtil.getStrTime(loss_starttimeStamp);
+								}
+								 
+								String loss_endtimeStamp=mdata.getString("loss_endtime");//时间戳
+								
+								String loss_endtime="";
+								if(loss_endtimeStamp.equals("null")){
+									
+								}else{
+									loss_endtime=MUtil.getDetailTime(loss_endtimeStamp);
+								}
+								String loss_id=mdata.getString("id");//repair_taskid
+								String loss_price=mdata.getString("loss_price");
+								if(loss_price.equals("null")){
+									loss_price="";
+								}
+
+								String factory_name=mdata.getString("factory_name");
+								if(factory_name.equals("null")){
+									factory_name="";
+								}
+								String loss_remark=mdata.getString("loss_remark");
+								if(loss_remark.equals("null")){
+									loss_remark="";
+								}
+								
+								recordStore.put("loss_finishstate", loss_finishstate);
+								recordStore.put("loss_id", loss_id);
+								recordStore.put("add_time", addTime);
+								recordStore.put("loss_starttime", loss_starttime);
+								recordStore.put("loss_endtime", loss_endtime);
+								recordStore.put("loss_price", loss_price);
+								recordStore.put("factory_name", factory_name);
+								recordStore.put("loss_remark", loss_remark);
+
+								
+								mapList.add(recordStore);
+							}
+						}
+						Intent toWaiRecord=new Intent(DealingTaskDetail.this,TuiRecordAct.class);
+						toWaiRecord.putExtra("maplist",(Serializable) mapList);
+						startActivity(toWaiRecord);
+
+					}else{
+						
+					}
+				}catch(JSONException e){
+					e.printStackTrace();
+				}
+			}
+
+			@Override
+			public void onFailure(Throwable e, JSONArray errorResponse) {
+				// TODO 自动生成的方法存根
+				super.onFailure(e, errorResponse);
+				if(queryPd!=null&&queryPd.isShowing()){
+					queryPd.dismiss();
+				}
+
+			}
+			
+			@Override
+			public void onFailure(Throwable e, String errorResponse) {
+				// TODO 自动生成的方法存根
+				super.onFailure(e, errorResponse);
+				Log.d("dealingTask", "query on Failure");
+				if(queryPd!=null&&queryPd.isShowing()){
+					queryPd.dismiss();
+				}
+
+			}
+			
+		});
+	}
+	
+	public void queryJiRecordByHttp(final String case_id){//查询稽核记录
+		queryPd=ProgressDialog.show(DealingTaskDetail.this, "查询中", "请稍后");
+		AsyncHttpClient queryClient=new AsyncHttpClient();
+		queryClient.addHeader("Charset", MHttpParams.DEFAULT_CHARSET);
+		queryClient.setTimeout(MHttpParams.DEFAULT_TIME_OUT);
+		String dUrl=MHttpParams.IP;
+		String mUrl=dealingTaskSP.getString("IP", dUrl);
+		String dPort=MHttpParams.DEFAULT_PORT;
+		String mPort=dealingTaskSP.getString("Port", dPort);
+		String queryUrl="http://"+mUrl+":"+mPort+"/"+MHttpParams.queryJiRecordUrl;
+		RequestParams params=new RequestParams();
+		//int case_id=caseidStr;
+		params.put("case_id", case_id);
+		queryClient.put(queryUrl, params, new JsonHttpResponseHandler(){
+
+			@Override
+			public void onSuccess(int statusCode, JSONObject response) {
+				// TODO 自动生成的方法存根
+				super.onSuccess(statusCode, response);
+				if(queryPd!=null&&queryPd.isShowing()){
+					queryPd.dismiss();
+				}
+				boolean success=false;
+				try{
+					success=response.getBoolean("success");
+					if(success){
+						ArrayList<HashMap> mapList=new ArrayList<HashMap>();
+						
+						
+						JSONArray data=response.getJSONArray("data");
+						for(int i=0;i<data.length();i++){
+							HashMap recordStore=new HashMap();
+							JSONObject mdata=(JSONObject) data.get(i);
+							String audit_state=mdata.getString("audit_state");
+							if(audit_state.equals("1")){
+								String audit_finishstate="已完成";
+								String audit_starttimeStamp=mdata.getString("audit_starttime");//时间戳
+								String audit_starttime="";
+								if(audit_starttimeStamp.equals("null")){
+									
+								}else{
+									audit_starttime=MUtil.getDetailTime(audit_starttimeStamp);
+								}
+								
+								String jiId=mdata.getString("id");
+								String audit_endtimeStamp=mdata.getString("audit_endtime");//时间戳
+								String audit_endtime="";
+								if(audit_endtimeStamp.equals("null")){
+									
+								}else{
+									audit_endtime=MUtil.getStrTime(audit_endtimeStamp);
+								}
+								 
+								String audit_remark=mdata.getString("audit_remark");
+								
+								recordStore.put("jiId", jiId);
+								recordStore.put("audit_finishstate", audit_finishstate);
+								recordStore.put("audit_starttime", audit_starttime);
+								recordStore.put("audit_endtime", audit_endtime);
+								recordStore.put("audit_remark", audit_remark);
+
+								mapList.add(recordStore);
+							}else{
+								String audit_finishstate="稽核中";
+								String audit_starttimeStamp=mdata.getString("audit_starttime");//时间戳
+								String audit_starttime="";
+								if(audit_starttimeStamp.equals("null")){
+									
+								}else{
+									audit_starttime=MUtil.getDetailTime(audit_starttimeStamp);
+								}
+								
+								String jiId=mdata.getString("id");
+								String audit_endtimeStamp=mdata.getString("audit_endtime");//时间戳
+								String audit_endtime="";
+								if(audit_endtimeStamp.equals("null")){
+									
+								}else{
+									audit_endtime=MUtil.getStrTime(audit_endtimeStamp);
+								}
+								 
+								String audit_remark=mdata.getString("audit_remark");
+								
+								recordStore.put("jiId", jiId);
+								recordStore.put("audit_finishstate", audit_finishstate);
+								recordStore.put("audit_starttime", audit_starttime);
+								recordStore.put("audit_endtime", audit_endtime);
+								recordStore.put("audit_remark", audit_remark);
+
+								mapList.add(recordStore);
+							}
+						}
+						Intent toWaiRecord=new Intent(DealingTaskDetail.this,JiRecordAct.class);
+						toWaiRecord.putExtra("maplist",(Serializable) mapList);
+						startActivity(toWaiRecord);
+
+					}else{
+						
+					}
+				}catch(JSONException e){
+					e.printStackTrace();
+				}
+			}
+
+			@Override
+			public void onFailure(Throwable e, JSONArray errorResponse) {
+				// TODO 自动生成的方法存根
+				super.onFailure(e, errorResponse);
+				if(queryPd!=null&&queryPd.isShowing()){
+					queryPd.dismiss();
+				}
+
+			}
+			
+			@Override
+			public void onFailure(Throwable e, String errorResponse) {
+				// TODO 自动生成的方法存根
+				super.onFailure(e, errorResponse);
+				Log.d("dealingTask", "query on Failure");
+				if(queryPd!=null&&queryPd.isShowing()){
+					queryPd.dismiss();
+				}
+
+			}
+			
+		});
+	}
+	
 	public void queryStateByHttp(){//查询支线任务是否完成
 		queryPd=ProgressDialog.show(DealingTaskDetail.this, "加载中", "请稍后");
 		AsyncHttpClient queryClient=new AsyncHttpClient();
@@ -591,9 +1102,14 @@ ProgressDialog queryPd;
 						}else if(loss_state==0){
 							Toast.makeText(DealingTaskDetail.this, "推定任务尚未完成", Toast.LENGTH_SHORT).show();
 						}else{
-							CanfinishByHttp();//查询三代的步骤
-							//showCaseNoDialog();
-							////finishByHttp(dingsunAmount);
+							if(isYidiCar==1){//是异地车
+								showCaseNoDialog();
+							}else{
+								CanfinishByHttp();//查询三代的步骤
+								//showCaseNoDialog();
+								////finishByHttp(dingsunAmount);
+							}
+							
 						}
 					}else{
 						
@@ -607,6 +1123,9 @@ ProgressDialog queryPd;
 			public void onFailure(Throwable e, JSONArray errorResponse) {
 				// TODO 自动生成的方法存根
 				super.onFailure(e, errorResponse);
+				if(queryPd!=null&&queryPd.isShowing()){
+					queryPd.dismiss();
+				}
 			}
 			
 			@Override
@@ -614,6 +1133,9 @@ ProgressDialog queryPd;
 				// TODO 自动生成的方法存根
 				super.onFailure(e, errorResponse);
 				Log.d("dealingTask", "query on Failure");
+				if(queryPd!=null&&queryPd.isShowing()){
+					queryPd.dismiss();
+				}
 			}
 			
 		});
@@ -692,6 +1214,7 @@ ProgressDialog queryPd;
 		params.put("id", String.valueOf(id));
 		params.put("case_id", caseidStr);
 		params.put("final_price", final_price);
+		params.put("isYidiCar", String.valueOf(isYidiCar));
 		finishClient.post(finishUrl, params,new JsonHttpResponseHandler(){
 
 			@Override

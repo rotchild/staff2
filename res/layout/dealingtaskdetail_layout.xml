@@ -214,6 +214,55 @@
         >
         
     </LinearLayout>
+    
+                <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/detail_padding"
+        >
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="是否为异地承保车辆："
+          android:textSize="@dimen/detail_font_sizel"
+          android:textColor="@color/detailFC"
+          android:layout_alignParentLeft="true"
+          />  
+<RadioGroup 
+    android:orientation="horizontal"
+    android:id="@+id/isyidiCarRG"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" 
+    android:layout_alignParentRight="true"
+    >"
+    <RadioButton
+        android:id="@+id/isyidiCar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="是"
+        android:textColor="@color/textgray"
+        ></RadioButton>
+    <RadioButton
+        android:id="@+id/notyidiCar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="否"
+        android:textColor="@color/textgray"
+        android:checked="true"
+        ></RadioButton>
+</RadioGroup> 
+      
+    </RelativeLayout>
+    
+            <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:orientation="vertical"
+        android:background="@color/backgray"
+        >
+        
+    </LinearLayout>    
+            
         
         <RelativeLayout
         android:layout_width="match_parent"
@@ -523,17 +572,19 @@
     android:orientation="vertical"
     android:background="@color/backgray"
     >
-   <RelativeLayout
+   <LinearLayout
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
        android:layout_marginTop="10dp"
+       android:orientation="horizontal"
+       android:padding="10dp"
+       android:layout_marginLeft="10dp"
        >
      <Button
          android:id="@+id/getPhoto_btn"
-         android:layout_width="105dp"
+         android:layout_width="1dp"
+         android:layout_weight="1"
          android:layout_height="35dp"
-         android:layout_alignParentLeft="true"
-         android:layout_marginLeft="30dp"
          android:text="人车合影"
          android:textSize="@dimen/buttonFontSize"
          android:padding="5dp"
@@ -542,50 +593,93 @@
          />  
       <Button
          android:id="@+id/waixiu_btn"
-         android:layout_width="105dp"
+         android:layout_width="1dp"
+         android:layout_weight="1"
          android:layout_height="35dp"
-         android:layout_alignParentRight="true"
-         android:layout_marginRight="30dp"
          android:text="外修申请"
          android:textSize="@dimen/buttonFontSize"
          android:padding="5dp"
          android:background="@drawable/login_background"
          android:textColor="@color/white"
+         android:layout_marginLeft="10dp"
          
-         />  
-   </RelativeLayout>
-    <RelativeLayout
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:layout_marginTop="10dp"
-       >
-     <Button
+         />
+       <Button
          android:id="@+id/tuiding_btn"
-         android:layout_width="105dp"
+         android:layout_width="1dp"
+         android:layout_weight="1"
          android:layout_height="35dp"
-         android:layout_alignParentLeft="true"
-         android:layout_marginLeft="30dp"
          android:text="推定全损"
          android:textSize="@dimen/buttonFontSize"
          android:padding="5dp"
          android:background="@drawable/login_background"
          android:textColor="@color/white"
-         
-         />  
-      <Button
+         android:layout_marginLeft="10dp"
+         /> 
+        <Button
          android:id="@+id/jihe_btn"
-         android:layout_width="105dp"
+         android:layout_width="1dp"
+         android:layout_weight="1"
          android:layout_height="35dp"
-         android:layout_alignParentRight="true"
-         android:layout_marginRight="30dp"
          android:text="稽核申请"
          android:textSize="@dimen/buttonFontSize"
          android:padding="5dp"
          android:background="@drawable/login_background"
          android:textColor="@color/white"
+         android:layout_marginLeft="10dp"
         
-         />  
-   </RelativeLayout>
+         /> 
+   </LinearLayout>
+    <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_marginTop="5dp"
+       android:layout_marginLeft="50dp"
+       android:layout_marginRight="50dp"
+       android:orientation="horizontal"
+       >
+        <Button
+         android:id="@+id/waixiurecord_btn"
+         android:layout_width="1dp"
+         android:layout_weight="1"
+         android:layout_height="35dp"
+         android:text="外修记录"
+         android:textSize="@dimen/buttonFontSize"
+         android:padding="5dp"
+         android:background="@drawable/yellowlogin_background"
+         android:textColor="@color/white"
+         android:layout_marginLeft="10dp"
+         
+         />
+        
+        <Button
+         android:id="@+id/tuidingrecord_btn"
+         android:layout_width="1dp"
+         android:layout_weight="1"
+         android:layout_height="35dp"
+         android:text="推定记录"
+         android:textSize="@dimen/buttonFontSize"
+         android:padding="5dp"
+         android:background="@drawable/bulelogin_background"
+         android:textColor="@color/white"
+         android:layout_marginLeft="10dp"
+         /> 
+         
+         <Button
+         android:id="@+id/jiherecord_btn"
+         android:layout_width="1dp"
+         android:layout_weight="1"
+         android:layout_height="35dp"
+         android:text="稽核记录"
+         android:textSize="@dimen/buttonFontSize"
+         android:padding="5dp"
+         android:background="@drawable/greenlogin_background"
+         android:textColor="@color/white"
+         android:layout_marginLeft="10dp"
+        
+         /> 
+ 
+   </LinearLayout>
    <RelativeLayout
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
@@ -611,7 +705,7 @@
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
            android:text="完成"
-           android:textSize="@dimen/buttonFontSize"
+           android:textSize="@dimen/buttonFontSize3"
            android:background="@drawable/login_background"
            android:textColor="@color/white"
            android:layout_marginLeft="30dp"

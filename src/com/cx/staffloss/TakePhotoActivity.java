@@ -295,7 +295,7 @@ for(String provider:providers){
 }
 
 public void uploadPicture(String path){
-	takePhotopd=ProgressDialog.show(TakePhotoActivity.this, "上传中", "请稍候...");
+	
 	AsyncHttpClient uploadClient=new AsyncHttpClient();
 	uploadClient.addHeader("Charset", MHttpParams.DEFAULT_CHARSET);
 	uploadClient.setTimeout(MHttpParams.DEFAULT_TIME_OUT);
@@ -317,6 +317,7 @@ public void uploadPicture(String path){
 	if(imgFile.exists()){
 		try {
 			params.put("files", imgFile);
+			takePhotopd=ProgressDialog.show(TakePhotoActivity.this, "上传中", "请稍候...");
 			uploadClient.post(uploadUrl, params, new JsonHttpResponseHandler(){
 
 				@Override
@@ -387,6 +388,8 @@ public void uploadPicture(String path){
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();
 		}
+	}else{
+		Toast.makeText(TakePhotoActivity.this, "图片文件无法保存", Toast.LENGTH_SHORT).show();
 	}
 	
 	

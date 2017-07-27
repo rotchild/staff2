@@ -129,6 +129,22 @@
             android:screenOrientation="portrait"
             >
          </activity>
+         
+           <activity
+            android:name="com.cx.staffloss.WaiRecordAct"
+            android:screenOrientation="portrait"
+            >
+         </activity>
+          <activity
+            android:name="com.cx.staffloss.TuiRecordAct"
+            android:screenOrientation="portrait"
+            >
+         </activity>
+          <activity
+            android:name="com.cx.staffloss.JiRecordAct"
+            android:screenOrientation="portrait"
+            >
+         </activity>
      
             
      <receiver

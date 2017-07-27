@@ -347,6 +347,41 @@
          
      </LinearLayout> 
       
+           <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/detail_padding"
+        >
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="是否为异地承保车辆："
+          android:textSize="@dimen/detail_font_size"
+          android:textColor="@color/detailFC"
+          android:layout_alignParentLeft="true"
+          />  
+       <TextView
+          android:id="@+id/secfinishdetail_isYidiCar_tv"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text=""
+          android:textSize="@dimen/detail_font_size"
+          android:textColor="@color/textgray"
+          android:layout_alignParentRight="true"
+          />  
+    </RelativeLayout>
+    
+     <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="1dp"
+         android:orientation="vertical"
+         android:background="@color/linegray"
+         >
+         
+         
+     </LinearLayout> 
+     
+     
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
